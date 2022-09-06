@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Instructor Page</title>
+    <style>
+        body {
+            background-image: url("https://files.123freevectors.com/wp-content/original/145482-abstract-blue-and-white-blurred-lights-background-vector.jpg");
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+</head>
+<body>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">FirstName</th>
+        <th scope="col">LastName</th>
+        <th scope="col">Phone number</th>
+        <th scope="col">Email</th>
+        <th scope="col">Specialization</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Remove</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="instructor:${allInstructors}">
+        <th scope="row" th:text="${instructor.instructorId}"></th>
+        <td th:text="${instructor.firstName}"></td>
+        <td th:text="${instructor.lastName}"></td>
+        <td th:text="${instructor.phoneNumber}"></td>
+        <td th:text="${instructor.email}"></td>
+        <td th:text="${instructor.specialization}"></td>
+        <td>
+            <a th:href="@{/instructors/editInstructor/{instructorId}(instructorId=${instructor.getInstructorId()})}">
+                <button style="height: 40px; width: 80px; background-color:blue;">edit</button>
+            </a>
+        </td>
+        <td><form th:method="REMOVE" th:action="@{/instructors/{id}/{instructorId}/remove(id=${companyId},instructorId=${instructor.getInstructorId()})}">
+            <input type="submit" value="remove" style="height: 40px; width: 80px; background-color:violet;"/></form></td>
+
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/instructors/{companyId}/newInstructor(companyId=${companyId})}">
+    <button type="button" class="btn btn-primary btn-sm">Add New Instructor</button>
+</a>
+
+</body>
+</html>

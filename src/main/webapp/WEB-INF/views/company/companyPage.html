@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Companies</title>
+    <style>
+        body {
+            background-image: url("https://images.unsplash.com/photo-1553095066-5014bc7b7f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2FsbCUyMGJhY2tncm91bmR8ZW58MHx8MHx8&w=1000&q=80");
+        }
+    </style>
+    <style>table,
+    td {
+        border: 1px solid #333;
+        margin-top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 25px;
+    }
+
+    thead,
+    tfoot {
+        background-color: #e33d17;
+        color: #344712;
+    }
+    input {
+        border-radius: 10px;
+    }
+    </style>
+    <style>
+        table, th, td {
+            /*border: 2px solid #d9b818;*/
+            padding: 3px;
+        }
+        button
+        {
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+<table class="table table-bordered ">
+    <thead class="table-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Company name</th>
+        <th scope="col">Located country</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Course</th>
+        <th scope="col">Instructor</th>
+        <th scope="col">Student</th>
+    </tr>
+    </thead>
+    <tbody class="table-success">
+    <tr th:each="company : ${getAllCompanies}">
+        <td th:text="${company.companyId}"></td>
+        <td th:text="${company.companyName}"></td>
+        <td th:text="${company.locatedCountry}"></td>
+
+        <td><a th:href="@{/companies/updateCompany/{companyId}/(companyId=${company.getCompanyId()})}">
+            <button style="height: 40px; width: 80px; background-color:blue;">EDIT IT</button>
+        </a>
+        </td>
+        <td><form th:method="DELETE" th:action="@{/companies/delete/{id}(id=${company.getCompanyId()})}">
+            <input type="submit" value="REMOVE" style="height: 40px; width: 80px; background-color:darkorange;"/>
+        </form></td>
+        <td> <a th:href="@{/courses/allCourses/{companyId}(companyId=${company.getCompanyId()})}">
+            <input type="submit" value="COURSE" style="height: 40px; width: 80px;background: darkcyan;"/>
+        </a>
+        </td>
+        <td> <a th:href="@{/instructors/allInstructors/{companyId}(companyId=${company.getCompanyId()})}">
+            <input type="submit" value="INSTRUCTOR" style="height: 40px;width: 110px;background: lightcoral">
+        </a></td>
+        <td> <a th:href="@{/students/allStudents/{companyId}(companyId=${company.getCompanyId()})}">
+            <input type="submit" value="STUDENT" style="height: 40px;width: 80px;background: coral">
+        </a>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+<br><br>
+<input style=" display: block; margin: auto; font-size:25px; background-color: #a4d945" type="button" class="btn btn-success" value="Add company"
+       onclick="window.location.href = 'add'">
+
+
+</body>
+</html>

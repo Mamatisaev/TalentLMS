@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Page</title>
+    <style>
+        body {
+            background-image: url("https://wallpaperaccess.com/full/113312.jpg");
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+          crossorigin="anonymous">
+</head>
+<style>table,
+td {
+    border: 1px solid #333;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 15px;
+}
+
+thead,
+tfoot {
+    background-color: #e8e5e5;
+    color: #344712;
+}
+</style>
+<style>
+    table, th, td {
+        border: 1px solid #1e1818;
+        padding: 3px;
+    }
+</style>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Task Name</th>
+        <th scope="col">Task Text</th>
+        <th scope="col">Lesson</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Remove</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task:${allTasks}">
+        <th th:text="${task.taskId}"></th>
+        <td th:text="${task.taskName}"></td>
+        <td th:text="${task.taskText}"></td>
+        <td th:text="${task.getLessons().getLessonName()}"></td>
+        <td>
+            <a th:href="@{/tasks/editTask/{taskId}(taskId=${task.getTaskId()})}">
+                <button style="height: 40px; width: 80px; background-color:blue;">edit it</button>
+            </a>
+        </td>
+        </td>
+        <td><form th:method="REMOVE" th:action="@{/tasks/{lessonId}/{taskId}/removeTask(lessonId=${lessonId},taskId=${task.getTaskId()})}">
+            <input type="submit" value="remove it" style="height: 40px; width: 80px; background-color:#abd21e;"/></form></td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/tasks/addTask/{lessonId}(lessonId=${lessonId})}">
+    <button type="button" class="btn btn-primary btn-sm">Add Task</button>
+</a>
+
+</body>
+</html>
+
+

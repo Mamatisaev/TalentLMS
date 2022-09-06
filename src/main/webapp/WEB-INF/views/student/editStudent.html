@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Course</title>
+    <style>
+        body {
+            background-image: url("https://files.123freevectors.com/wp-content/original/148487-pink-curve-background-vector-illustration.jpg");
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <style media="screen">
+        .input-container input {
+            border: none;
+            box-sizing: border-box;
+            outline: 0;
+            padding: .75rem;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<form th:action="@{/students/{companyId}/{studentId}/saveEditedStudent(companyId=${companyId},studentId=${studentId})}"
+      th:object="${student}"
+      th:method="post">
+    <div><label>
+        <input name="First Name" th:field="*{firstName}">
+    </label></div>
+    <br>
+    <div><label>
+        <input name="Last Name" th:field="*{lastName}">
+    </label></div>
+    <br>
+    <div><label>
+        <input name="Phone number" th:field="*{phoneNumber}">
+    </label></div>
+    <br>
+    <div><label>
+        <input name="Enter email" th:field="*{email}">
+    </label></div>
+    <br>
+    <div><label>
+        <input name="Study Format" th:field="*{studyFormat}">
+    </label></div>
+    <br>
+    <div><input  type="submit" value="save it"></div>
+
+</form>
+</body>
+
+
